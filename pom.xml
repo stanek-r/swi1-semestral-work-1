@@ -8,5 +8,11 @@
     <artifactId>swi1-semestral-work-1</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.2.13.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>
