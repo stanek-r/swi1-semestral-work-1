@@ -8,9 +8,9 @@ import java.sql.Statement;
 public class MysqlConnection {
     private static Connection connection;
 
-    private static final String DB_NAME = "testing";
+    private static final String DB_NAME = "test_database";
     private static final String DB_USERNAME = "test_user";
-    private static final String DB_PASSWORD = "test_password";
+    private static final String DB_PASSWORD = "123456789";
 
     private static void openConnection() throws SQLException {
         if(connection != null && !connection.isClosed()){
