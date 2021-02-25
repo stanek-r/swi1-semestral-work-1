@@ -32,8 +32,7 @@ public class Main extends Application {
             while (rs.next()){
                 System.out.println(rs.getInt("id") + " : " + rs.getInt("number") + " " + rs.getString("text") + " " + rs.getString("datetime"));
             }
-
-            //MysqlConnection.getStatement().executeUpdate("INSERT INTO test_table VALUES (NULL, 'Text text text', '25', NOW())");
+//            MysqlConnection.getStatement().executeUpdate("INSERT INTO test_table VALUES (NULL, 'Ahojda', '25', NOW())");
             //MysqlConnection.getStatement().executeUpdate("DELETE FROM test_table WHERE id = '1'");
         }catch (SQLException e){
             e.printStackTrace();
