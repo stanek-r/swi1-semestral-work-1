@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SecondController">
+   <children>
+      <TableView fx:id="tvVypis" layoutY="7.0" prefHeight="650.0" prefWidth="1280.0">
+        <columns>
+            <TableColumn fx:id="idCheckbox" prefWidth="75.0" sortable="false" />
+          <TableColumn fx:id="idRC_IC" prefWidth="100.0" text="RC_IC" />
+          <TableColumn fx:id="idName" prefWidth="75.0" text="name" />
+            <TableColumn fx:id="idSurname" prefWidth="75.0" text="surname" />
+            <TableColumn fx:id="idDate" prefWidth="75.0" text="date" />
+            <TableColumn fx:id="idTime" prefWidth="75.0" text="time" />
+            <TableColumn fx:id="idSPZ" prefWidth="75.0" text="SPZ" />
+            <TableColumn fx:id="idDesc" minWidth="-1.0" prefWidth="500.0" text="description" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnReload" layoutX="234.0" layoutY="674.0" mnemonicParsing="false" onAction="#reloadTable" text="Reload" />
+      <Button fx:id="btnBack" layoutX="1156.0" layoutY="674.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="97.0" text="Go Back" />
+      <Button layoutX="48.0" layoutY="674.0" mnemonicParsing="false" onAction="#deleteFromTable" text="Delete selected" />
+   </children>
+</AnchorPane>

@@ -16,15 +16,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
         primaryStage.setTitle("Test app");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
-        testDatabase();
+
+//        testDatabase();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 
     private void testDatabase(){
         try{
