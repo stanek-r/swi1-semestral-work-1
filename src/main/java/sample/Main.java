@@ -9,14 +9,20 @@ import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+        ResourceBundle rs = ResourceBundle.getBundle("localization.Bundle",Locale.ENGLISH);
+        //noinspection ConstantConditions
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"), rs);
         primaryStage.setTitle("Test app");
-        primaryStage.setScene(new Scene(root, 1280, 720));
+        Scene loginScene = new Scene(root,1280,720);
+        primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button layoutX="583.0" layoutY="564.0" mnemonicParsing="false" onAction="#changeWindow" prefHeight="25.0" prefWidth="115.0" text="Zobrazit" />
+      <TextField fx:id="tfSPZ" layoutX="440.0" layoutY="279.0" prefHeight="25.0" prefWidth="400.0" promptText="SPZ" />
+      <Button fx:id="btnSubmit" layoutX="440.0" layoutY="528.0" mnemonicParsing="false" onAction="#sendForm" prefHeight="27.0" prefWidth="400.0" style="-fx-background-color: #0373fc; -fx-border-radius: 30;" text="Přidat" />
+      <TextArea fx:id="taDescription" layoutX="440.0" layoutY="317.0" prefHeight="200.0" prefWidth="400.0" promptText="Popis technické závady" />
+      <TextField fx:id="personId" layoutX="440.0" layoutY="198.0" prefHeight="25.0" prefWidth="400.0" promptText="Rodné číslo" />
+      <RadioButton layoutX="650.0" layoutY="170.0" mnemonicParsing="false" onAction="#radioButtonChanged" text="Cizinec">
+         <toggleGroup>
+            <ToggleGroup fx:id="nationality" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbNationality" layoutX="582.0" layoutY="170.0" mnemonicParsing="false" onAction="#radioButtonChanged" selected="true" text="Čech" toggleGroup="$nationality">
+      </RadioButton>
+      <ComboBox fx:id="cbArriveTime" layoutX="440.0" layoutY="126.0" prefWidth="190.0" promptText="Čas příchodu">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="8:30" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <DatePicker fx:id="dpArriveDate" layoutX="650.0" layoutY="126.0" onAction="#testAction" prefWidth="190.0" promptText="Datum příchodu" />
+      <TextField fx:id="tfSurname" layoutX="650.0" layoutY="85.0" prefWidth="190.0" promptText="Příjmení" />
+      <TextField fx:id="tfName" layoutX="440.0" layoutY="85.0" prefHeight="25.0" prefWidth="190.0" promptText="Jméno" />
+      <TextField fx:id="tfPhoneNumber" layoutX="440.0" layoutY="241.0" prefHeight="25.0" prefWidth="190.0" promptText="Telefonní číslo" />
+      <TextField fx:id="tfEmail" layoutX="650.0" layoutY="241.0" prefHeight="25.0" prefWidth="190.0" promptText="Email" />
+   </children>
+</AnchorPane>

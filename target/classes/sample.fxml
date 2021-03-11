@@ -47,8 +47,9 @@
        <RadioButton mnemonicParsing="false" onAction="#radioButtonChanged" text="Cizinec" toggleGroup="$nationality" GridPane.columnIndex="1" GridPane.rowIndex="3" />
        <TextField fx:id="personId" prefWidth="400" promptText="Rodné číslo" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
        <TextArea fx:id="taDescription" prefHeight="200.0" prefWidth="200.0" promptText="Popis technické závady" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.rowSpan="2" />
-       <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#changeXD" prefHeight="27.0" prefWidth="412.0" style="-fx-background-color: #0373fc; -fx-border-radius: 30;" text="Button" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+       <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#sendForm" prefHeight="27.0" prefWidth="412.0" style="-fx-background-color: #0373fc; -fx-border-radius: 30;" text="Přidat" GridPane.columnSpan="2" GridPane.rowIndex="8" />
        <TextField fx:id="tfSPZ" promptText="SPZ" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onAction="#changeWindow" text="Zobrazit" GridPane.columnIndex="1" GridPane.rowIndex="9" />
    </children>
 
 </GridPane>

@@ -109,7 +109,7 @@ public class SecondController implements Initializable {
     }
 
     public void goBack(ActionEvent event) throws IOException {
-        Parent main = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        Parent main = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"));
         Scene mainScene = new Scene(main,1280,720);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

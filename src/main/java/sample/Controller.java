@@ -13,8 +13,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class Controller {
@@ -37,6 +40,7 @@ public class Controller {
     private RadioButton rbNationality;
     @FXML
     private TextField personId;
+    private String nat;
 
     @FXML
     private void testAction(){
@@ -76,18 +80,31 @@ public class Controller {
             personId.setPromptText("Identifikační číslo");
     }
 
-//    private void sendForm(){
-//        StringBuilder sb = new StringBuilder("INSERT INTO Tabulka VALUES (");
-//        sb.append("RC/" + personId.getText() + ", ");
-//
-//        MysqlConnection.getStatement().executeUpdate(sb.toString());
-//
-//    }
+    @FXML
+    private void sendForm(){
+        nat = rbNationality.isSelected() ? "RC_" : "IC_";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm");
+        StringBuilder sb = new StringBuilder("INSERT INTO aaaaa VALUES (");
+        sb.append("'" + nat + personId.getText() + "', ");
+        sb.append("'" + tfName.getText() + "', ");
+        sb.append("'" + tfSurname.getText() + "', ");
+        sb.append("'" + dpArriveDate.getValue() + "', ");
+        sb.append("'" + LocalTime.parse(cbArriveTime.getValue().toString(),dtf) + "', ");
+        sb.append("'" + tfSPZ.getText() + "', ");
+        sb.append("'" + taDescription.getText() + "')");
+
+        try{
+            MysqlConnection.getStatement().executeUpdate(sb.toString());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        System.out.println(sb.toString());
+
+    }
     @FXML
     public void changeWindow(ActionEvent event) throws IOException {
         Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("second.fxml"));
         Scene hehe = new Scene(second);
-
         Stage w = (Stage)((Node)event.getSource()).getScene().getWindow();
         w.setScene(hehe);
         w.show();
