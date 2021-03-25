@@ -1,10 +1,11 @@
-package cz.osu.semProject.controllers;
+package cz.osu.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,8 +27,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
 //        String str = getClass().getClassLoader().getResource("../images/login.png").toString();
 //        System.out.println(str);
 //        imgViewLogin.setImage(new Image());
@@ -35,19 +34,30 @@ public class LoginController implements Initializable {
 
     @FXML
     private void onLoginClick(ActionEvent event){
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("Špatné jméno/heslo");
-//
-//        alert.setHeaderText(null);
-//        alert.setContentText("ERROR");
-//        alert.showAndWait();
+        if(tfUsername.getText().equals("user") && tfPassword.getText().equals("123456")){
+            try{
+                Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"));
+                Scene hehe = new Scene(second);
+                Stage w = (Stage)((Node)event.getSource()).getScene().getWindow();
+                w.setScene(hehe);
+                w.show();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Špatné jméno/heslo");
+
+            alert.setHeaderText(null);
+            alert.setContentText("ERROR");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void onSettingsClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxmlFiles/settings.fxml"));
         Parent parent = fxmlLoader.load();
-//        Controller controller = fxmlLoader.<Controller>getController();
 
         Scene scene = new Scene(parent, 200,200);
         Stage stage = new Stage();

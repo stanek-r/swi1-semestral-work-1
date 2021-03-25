@@ -1,4 +1,4 @@
-package sample;
+package cz.osu.controllers;
 
 
 
@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import cz.osu.semProject.Reservation;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,10 +25,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class SecondController implements Initializable {
+public class ShowController implements Initializable {
     @FXML private AnchorPane anchorPane;
     @FXML private TableView<Reservation> tvVypis;
     @FXML public TableColumn<Reservation, Boolean> idCheckbox;

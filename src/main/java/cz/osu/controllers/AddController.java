@@ -1,6 +1,8 @@
-package sample;
+package cz.osu.controllers;
 
 import cz.osu.semProject.MysqlConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +14,13 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Map;
 
 
-public class Controller {
+public class AddController {
     public ToggleGroup nationality;
     @FXML
     private TextField tfName;
@@ -44,33 +44,22 @@ public class Controller {
 
     @FXML
     private void testAction(){
-//        System.out.println("Funguje to kámo");
+        String tmp = dpArriveDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-    }
-    @FXML
-    private void submitClick(){
-        formToString();
-    }
+        ObservableList<Object> ol = cbArriveTime.getItems();
+        ObservableList<LocalTime> defaultListOfTimes = FXCollections.observableArrayList(LocalTime.of(7, 0), LocalTime.of(8, 0), LocalTime.of(9, 0), LocalTime.of(10, 0), LocalTime.of(11, 0), LocalTime.of(12, 0), LocalTime.of(13, 0), LocalTime.of(14, 0), LocalTime.of(15, 0), LocalTime.of(16, 0));
 
-    private String formToString(){
-        StringBuilder sb = new StringBuilder("Zákazník: {");
-        sb.append(tfName.getText());
-        sb.append(" ");
-        sb.append(tfSurname.getText());
-        sb.append(" Datum a čas příchodu: ");
-        sb.append(dpArriveDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        sb.append(" ");
-        sb.append(cbArriveTime.getValue());
-        sb.append(" ID/RČ: ");
-        sb.append(personId.getText());
-        sb.append(" SPZ: ");
-        sb.append(tfSPZ.getText());
-        sb.append(" Popis závady: ");
-        sb.append(taDescription.getText());
-        sb.append("}");
-        return sb.toString();
+        try{
+            ResultSet rs = MysqlConnection.getStatement().executeQuery("SELECT * FROM `aaaaa` WHERE `date` = '" + tmp + "'");
+            while(rs.next()){
+                defaultListOfTimes.remove(rs.getTime("time").toLocalTime());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        ol.clear();
+        ol.addAll(defaultListOfTimes);
     }
-
 
     @FXML
     private void radioButtonChanged(){
@@ -81,7 +70,7 @@ public class Controller {
     }
 
     @FXML
-    private void sendForm(){
+    private void sendForm(ActionEvent event){
         nat = rbNationality.isSelected() ? "RC_" : "IC_";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm");
         StringBuilder sb = new StringBuilder("INSERT INTO aaaaa VALUES (");
@@ -100,10 +89,16 @@ public class Controller {
         }
         System.out.println(sb.toString());
 
+        try{
+            Thread.sleep(1000);
+            changeWindow(event);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     @FXML
     public void changeWindow(ActionEvent event) throws IOException {
-        Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("second.fxml"));
+        Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/show.fxml"));
         Scene hehe = new Scene(second);
         Stage w = (Stage)((Node)event.getSource()).getScene().getWindow();
         w.setScene(hehe);

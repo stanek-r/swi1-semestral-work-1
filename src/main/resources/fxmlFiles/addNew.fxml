@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.osu.controllers.AddController">
    <children>
       <Button layoutX="583.0" layoutY="564.0" mnemonicParsing="false" onAction="#changeWindow" prefHeight="25.0" prefWidth="115.0" text="Zobrazit" />
       <TextField fx:id="tfSPZ" layoutX="440.0" layoutY="279.0" prefHeight="25.0" prefWidth="400.0" promptText="SPZ" />
@@ -22,7 +22,6 @@
       <ComboBox fx:id="cbArriveTime" layoutX="440.0" layoutY="126.0" prefWidth="190.0" promptText="Čas příchodu">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="8:30" />
             </FXCollections>
          </items>
       </ComboBox>

@@ -1,0 +1,80 @@
+@startuml
+class Main{
+    + <<static>> main() : void
+    + start() : void
+}
+class MysqlConnection{
+    - <<static>> connection : Connection
+    - <<static>> <<final>> DB_NAME : String
+    - <<static>> <<final>> DB_USERNAME : String
+    - <<static>> <<final>> DB_PASSWORD : String
+    - <<static>> openConnection() : void
+    + <<static>> getStatement() : Statement
+}
+class Reservation{
+    + <<get/set>> checkBox : CheckBox
+    + <<get/set>> rcIC : SimpleStringProperty
+    + <<get/set>> name : SimpleStringProperty
+    + <<get/set>> surname : SimpleStringProperty
+    + <<get/set>> date : LocalDate
+    + <<get/set>> time : LocalTime
+    + <<get/set>> SPZ : SimpleStringProperty
+    + <<get/set>> description : SimpleStringProperty
+}
+
+class AddController{
+    + nationality : ToggleGroup
+    - tfName : TextField
+    - tfSurname : TextField
+    - cbArriveTime : ComboBox
+    - dpArriveDate : DatePicker
+    - taDescription : TextArea
+    - tfSPZ : TextField
+    - btnSubmit : Button
+    - rbNationality : RadioButton
+    - personId : TextField
+    - nat : String
+    - testAction() : void
+    - radioButtonChanged() : void
+    - sendForm(event : ActionEvent) : void
+    + changeWindow(event : ActionEvent) : void
+}
+class LoginController{
+    - tfUsername : TextField
+    - tfPassword : TextField
+    - imgViewLogin : ImageView
+    - onLoginClick(event : ActionEvent) : void
+    - onSettingsClick() : void
+    - setStyleSheetHehe(event : ActionEvent) : void
+    - getEventSenderName(sender : Object) : String
+    - changeTheme(name : String) : String
+}
+class ShowController{
+    - anchorPane : AnchorPane
+    - tvVypis : TableView<Reservation>
+    - checkBox : CheckBox
+    - reservationModels : ObservableList<Reservation>
+    + idCheckbox : TableColumn<Reservation, Boolean>
+    + idRC_IC : TableColumn<Reservation, String>
+    + idName : TableColumn<Reservation, String>
+    + idSurname : TableColumn<Reservation, String>
+    + idDate : TableColumn<Reservation, LocalDate>
+    + idTime : TableColumn<Reservation, LocalTime>
+    + idSPZ : TableColumn<Reservation, String>
+    + idDesc : TableColumn<Reservation, String>
+    + initialize(location : URL, resources : ResourceBundle) : void
+    - checkAll(isChecked : boolean) : void
+    + deleteFromTable() : void
+    + reloadTable() : void
+    + goBack(event : ActionEvent) : void
+}
+
+MysqlConnection -> AddController
+MysqlConnection -> LoginController
+MysqlConnection -> ShowController
+
+Reservation -> ShowController
+
+LoginController -> Main
+
+@enduml
