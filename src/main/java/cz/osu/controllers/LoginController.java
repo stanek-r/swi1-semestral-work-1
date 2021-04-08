@@ -34,7 +34,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void onLoginClick(ActionEvent event){
-        if(tfUsername.getText().equals("user") && tfPassword.getText().equals("123456")){
+        if(tfUsername.getText().equalsIgnoreCase("user") && tfPassword.getText().equals("123456")){
             try{
                 Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"));
                 Scene hehe = new Scene(second);
