@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 public class ShowController implements Initializable {
@@ -80,18 +81,19 @@ public class ShowController implements Initializable {
     }
 
     public void deleteFromTable(){
-
+        HashSet<Reservation> toRemove = new HashSet<>();
         for (int i = 0; i < reservationModels.size(); i++) {
             if(reservationModels.get(i).getCheckBox().isSelected()){
                 try{
                     MysqlConnection.getStatement().executeUpdate("DELETE FROM aaaaa where RC_IC='" + reservationModels.get(i).getRcIC() +"'");
+
+                    toRemove.add(reservationModels.get(i));
                 } catch (SQLException e){
                     e.printStackTrace();
                 }
-                reservationModels.remove(i);
             }
         }
-
+        reservationModels.removeAll(toRemove);
     }
 
     public void reloadTable(){
