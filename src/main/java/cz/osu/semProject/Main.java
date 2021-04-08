@@ -1,5 +1,6 @@
 package cz.osu.semProject;
 
+import cz.osu.controllers.Variables;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        ResourceBundle rb = ResourceBundle.getBundle("localization.Bundle",Locale.ENGLISH);
+        ResourceBundle rb = ResourceBundle.getBundle("localization.Bundle", Variables.LOCALE);
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/login.fxml"), rb);
         primaryStage.setTitle("Test app");

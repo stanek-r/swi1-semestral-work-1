@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -36,7 +37,9 @@ public class LoginController implements Initializable {
     private void onLoginClick(ActionEvent event){
         if(tfUsername.getText().equalsIgnoreCase("user") && tfPassword.getText().equals("123456")){
             try{
-                Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"));
+                ResourceBundle rb = ResourceBundle.getBundle("localization.Bundle", Variables.LOCALE);
+
+                Parent second = FXMLLoader.load(getClass().getClassLoader().getResource("fxmlFiles/addNew.fxml"), rb);
                 Scene hehe = new Scene(second);
                 Stage w = (Stage)((Node)event.getSource()).getScene().getWindow();
                 w.setScene(hehe);
