@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.osu.controllers.ShowController">
    <children>
-      <TableView fx:id="tvVypis" layoutY="7.0" prefHeight="650.0" prefWidth="1280.0" >
+      <TableView fx:id="tvVypis" layoutY="7.0" prefHeight="650.0" prefWidth="1280.0">
         <columns>
-            <TableColumn fx:id="idCheckbox" prefWidth="75.0" sortable="false" />
-          <TableColumn fx:id="idRC_IC" prefWidth="100.0" text="RC_IC" />
-          <TableColumn fx:id="idName" prefWidth="75.0" text="name" />
-            <TableColumn fx:id="idSurname" prefWidth="75.0" text="surname" />
-            <TableColumn fx:id="idDate" prefWidth="75.0" text="date" />
-            <TableColumn fx:id="idTime" prefWidth="75.0" text="time" />
-            <TableColumn fx:id="idSPZ" prefWidth="75.0" text="SPZ" />
-            <TableColumn fx:id="idDesc" minWidth="-1.0" prefWidth="500.0" text="description" />
+            <TableColumn fx:id="idCheckbox" prefWidth="30.0" sortable="false" />
+            <TableColumn fx:id="idRC_IC" minWidth="50.0" prefWidth="-1.0" text="RC_IC" />
+            <TableColumn fx:id="idName" minWidth="50.0" prefWidth="-1.0" text="Jméno" />
+            <TableColumn fx:id="idSurname" minWidth="60.0" prefWidth="-1.0" text="Příjmení" />
+            <TableColumn fx:id="idDate" minWidth="50.0" prefWidth="-1.0" text="Datum" />
+            <TableColumn fx:id="idTime" minWidth="30.0" prefWidth="-1.0" text="Čas" />
+            <TableColumn fx:id="idEmail" minWidth="40.0" prefWidth="-1.0" text="Email" />
+            <TableColumn fx:id="idPhoneNumber" minWidth="100.0" prefWidth="-1.0" text="Telefonní číslo" />
+            <TableColumn fx:id="idSPZ" minWidth="40.0" prefWidth="-1.0" text="SPZ" />
+            <TableColumn fx:id="idDesc" minWidth="100.0" prefWidth="-1.0" text="Popis závady" />
         </columns>
       </TableView>
       <Button fx:id="btnReload" layoutX="234.0" layoutY="674.0" mnemonicParsing="false" onAction="#reloadTable" text="Reload" />

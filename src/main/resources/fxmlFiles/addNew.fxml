@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -7,26 +8,59 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.osu.controllers.AddController">
    <children>
-      <TextField fx:id="tfName" layoutX="440.0" layoutY="85.0" prefHeight="25.0" prefWidth="190.0" promptText="%name" />
-      <TextField fx:id="tfSurname" layoutX="650.0" layoutY="85.0" prefWidth="190.0" promptText="%surname" />
-      <DatePicker fx:id="dpArriveDate" layoutX="440.0" layoutY="127.0" onAction="#testAction" prefWidth="190.0" promptText="%dateofarrival" />
-      <ComboBox fx:id="cbArriveTime" layoutX="650.0" layoutY="127.0" prefWidth="190.0" promptText="%timeofarrival">
+      <TextField fx:id="tfName" layoutX="440.0" layoutY="85.0" prefHeight="25.0" prefWidth="190.0" promptText="Jméno">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfSurname" layoutX="650.0" layoutY="85.0" prefWidth="190.0" promptText="Příjmení">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <DatePicker fx:id="dpArriveDate" layoutX="440.0" layoutY="127.0" onAction="#testAction" prefHeight="34.0" prefWidth="190.0" promptText="Datum příjezdu" />
+      <ComboBox fx:id="cbArriveTime" layoutX="650.0" layoutY="127.0" prefHeight="34.0" prefWidth="190.0" promptText="Čas příjezdu">
          <items>
             <FXCollections fx:factory="observableArrayList">
             </FXCollections>
          </items>
       </ComboBox>
-      <RadioButton fx:id="rbNationality" layoutX="582.0" layoutY="170.0" mnemonicParsing="false" onAction="#radioButtonChanged" selected="true" text="%czech">
+      <RadioButton fx:id="rbNationality" layoutX="562.0" layoutY="172.0" mnemonicParsing="false" onAction="#radioButtonChanged" selected="true" text="Čech">
          <toggleGroup>
             <ToggleGroup fx:id="nationality" />
-         </toggleGroup></RadioButton>
-      <RadioButton layoutX="650.0" layoutY="170.0" mnemonicParsing="false" onAction="#radioButtonChanged" text="%foreigner" toggleGroup="$nationality" />
-      <TextField fx:id="personId" layoutX="440.0" layoutY="198.0" prefHeight="25.0" prefWidth="400.0" promptText="%birthnumber" />
-      <TextField fx:id="tfPhoneNumber" layoutX="440.0" layoutY="241.0" prefHeight="25.0" prefWidth="190.0" promptText="%phonenumber" />
-      <TextField fx:id="tfEmail" layoutX="650.0" layoutY="241.0" prefHeight="25.0" prefWidth="190.0" promptText="Email" />
-      <TextField fx:id="tfSPZ" layoutX="440.0" layoutY="279.0" prefHeight="25.0" prefWidth="400.0" promptText="SPZ" />
-      <TextArea fx:id="taDescription" layoutX="440.0" layoutY="317.0" prefHeight="200.0" prefWidth="400.0" promptText="%description" />
-      <Button fx:id="btnSubmit" layoutX="440.0" layoutY="528.0" mnemonicParsing="false" onAction="#sendForm" prefHeight="27.0" prefWidth="400.0" style="-fx-background-color: #0373fc; -fx-border-radius: 30;" text="%add" />
-      <Button layoutX="583.0" layoutY="564.0" mnemonicParsing="false" onAction="#changeWindow" prefHeight="25.0" prefWidth="115.0" text="%show" />
+         </toggleGroup>
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></RadioButton>
+      <RadioButton layoutX="650.0" layoutY="171.0" mnemonicParsing="false" onAction="#radioButtonChanged" text="Cizinec" toggleGroup="$nationality">
+         <font>
+            <Font size="18.0" />
+         </font></RadioButton>
+      <TextField fx:id="personId" layoutX="440.0" layoutY="205.0" prefHeight="25.0" prefWidth="400.0" promptText="Rodné číslo">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfPhoneNumber" layoutX="440.0" layoutY="247.0" prefHeight="25.0" prefWidth="190.0" promptText="Telefonní číslo">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfEmail" layoutX="650.0" layoutY="247.0" prefHeight="25.0" prefWidth="190.0" promptText="Email">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfSPZ" layoutX="440.0" layoutY="290.0" prefHeight="25.0" prefWidth="400.0" promptText="SPZ">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextField>
+      <TextArea fx:id="taDescription" layoutX="440.0" layoutY="332.0" prefHeight="200.0" prefWidth="400.0" promptText="Popis závady">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></TextArea>
+      <Button fx:id="btnSubmit" layoutX="440.0" layoutY="541.0" mnemonicParsing="false" onAction="#sendForm" prefHeight="45.0" prefWidth="400.0" style="-fx-background-color: #0373fc; -fx-border-radius: 30;" text="Přidat rezervaci">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></Button>
+      <Button layoutX="559.0" layoutY="592.0" mnemonicParsing="false" onAction="#changeWindow" prefHeight="25.0" text="Zobraz objednávky">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -2,7 +2,8 @@ package cz.osu.controllers;
 
 
 
-import cz.osu.semProject.MysqlConnection;
+import com.google.gson.Gson;
+import cz.osu.semProject.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +18,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import cz.osu.semProject.Reservation;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -37,6 +36,8 @@ public class ShowController implements Initializable {
     @FXML public TableColumn<Reservation, String> idSurname;
     @FXML public TableColumn<Reservation, LocalDate> idDate;
     @FXML public TableColumn<Reservation, LocalTime> idTime;
+    @FXML public TableColumn<Reservation, String> idEmail;
+    @FXML public TableColumn<Reservation, String> idPhoneNumber;
     @FXML public TableColumn<Reservation, String> idSPZ;
     @FXML public TableColumn<Reservation, String> idDesc;
 
@@ -47,6 +48,7 @@ public class ShowController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tvVypis.setPlaceholder(new Label("V tabulce nejsou žádná data"));
         checkBox = new CheckBox();
         checkBox.setOnAction(event -> checkAll(checkBox.isSelected()));
         idCheckbox.setGraphic(checkBox);
@@ -57,21 +59,13 @@ public class ShowController implements Initializable {
         idSurname.setCellValueFactory(new PropertyValueFactory<>("Surname"));
         idDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
         idTime.setCellValueFactory(new PropertyValueFactory<>("Time"));
+        idEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        idPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
         idSPZ.setCellValueFactory(new PropertyValueFactory<>("SPZ"));
         idDesc.setCellValueFactory(new PropertyValueFactory<>("Description"));
 
-        try{
-            ResultSet rs = MysqlConnection.getStatement().executeQuery("SELECT * FROM aaaaa");
-            while (rs.next()){
-                reservationModels.add(new Reservation(new CheckBox(),rs.getString("RC_IC"),rs.getString("name"),rs.getString("surname"),
-                        rs.getDate("date").toLocalDate(),rs.getTime("time").toLocalTime(),rs.getString("SPZ"),rs.getString("description")));
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+        parseJsonFromBackend();
         tvVypis.setItems(reservationModels);
-
-
     }
 
     private void checkAll(boolean isChecked){
@@ -85,10 +79,9 @@ public class ShowController implements Initializable {
         for (int i = 0; i < reservationModels.size(); i++) {
             if(reservationModels.get(i).getCheckBox().isSelected()){
                 try{
-                    MysqlConnection.getStatement().executeUpdate("DELETE FROM aaaaa where RC_IC='" + reservationModels.get(i).getRcIC() +"'");
-
+                    BackendConnector.sendingDeleteRequest(reservationModels.get(i).getRcIC());
                     toRemove.add(reservationModels.get(i));
-                } catch (SQLException e){
+                } catch (Exception e){
                     e.printStackTrace();
                 }
             }
@@ -98,13 +91,19 @@ public class ShowController implements Initializable {
 
     public void reloadTable(){
         reservationModels.clear();
+        parseJsonFromBackend();
+        GUIUtils.autoFitTable(tvVypis);
+    }
+
+    private void parseJsonFromBackend() {
         try{
-            ResultSet rs = MysqlConnection.getStatement().executeQuery("SELECT * FROM aaaaa");
-            while (rs.next()){
-                reservationModels.add(new Reservation(new CheckBox(),rs.getString("RC_IC"),rs.getString("name"),rs.getString("surname"),
-                        rs.getDate("date").toLocalDate(),rs.getTime("time").toLocalTime(),rs.getString("SPZ"),rs.getString("description")));
+            Gson gson = new Gson();
+            JsonReservation[] reservations = gson.fromJson(BackendConnector.sendingGetRequest(), JsonReservation[].class);
+
+            for (JsonReservation wc : reservations) {
+                reservationModels.add(new Reservation(new CheckBox(),wc.getRC_IC(),wc.getName(),wc.getSurname(), LocalDate.parse(wc.getDate()), LocalTime.parse(wc.getTime()),wc.getEmail(),wc.getPhoneNumber(),wc.getSPZ(),wc.getDescription()));
             }
-        }catch (SQLException e){
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -6,23 +6,27 @@ import javafx.scene.control.CheckBox;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Reservation {
+public class Reservation{
     private CheckBox checkBox;
     private SimpleStringProperty rcIC;
     private SimpleStringProperty name;
     private SimpleStringProperty surname;
     private LocalDate date;
     private LocalTime time;
+    private SimpleStringProperty email;
+    private SimpleStringProperty phoneNumber;
     private SimpleStringProperty SPZ;
     private SimpleStringProperty description;
 
-    public Reservation(CheckBox checkBox, String rcIC, String name, String surname, LocalDate date, LocalTime time, String SPZ, String description) {
+    public Reservation(CheckBox checkBox, String rcIC, String name, String surname, LocalDate date, LocalTime time, String email, String phoneNumber, String SPZ, String description) {
         this.checkBox = checkBox;
         this.rcIC = new SimpleStringProperty(rcIC);
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
         this.date = date;
         this.time = time;
+        this.email = new SimpleStringProperty(email);
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
         this.SPZ = new SimpleStringProperty(SPZ);
         this.description = new SimpleStringProperty(description);
     }
@@ -88,6 +92,30 @@ public class Reservation {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public SimpleStringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber.get();
+    }
+
+    public SimpleStringProperty phoneNumberProperty() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber.set(phoneNumber);
     }
 
     public String getSPZ() {
