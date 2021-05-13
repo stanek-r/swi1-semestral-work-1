@@ -42,14 +42,20 @@ public class AddController {
     @FXML
     private void testAction(){
         String tmp = dpArriveDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
+        cbArriveTime.setDisable(false);
         ObservableList<Object> ol = cbArriveTime.getItems();
 
         ObservableList<LocalTime> defaultListOfTimes = FXCollections.observableArrayList();
         for(String time : parseJsonFromBackend(tmp)){
             defaultListOfTimes.add(LocalTime.parse(time));
         }
-
+        if(defaultListOfTimes.isEmpty()){
+            Alert a = new Alert(Alert.AlertType.ERROR,"Na toto datum již nejsou žádné volné termíny", ButtonType.OK);
+            a.setTitle("Chyba");
+            a.showAndWait();
+            cbArriveTime.setDisable(true);
+        }
+        dpArriveDate.requestFocus();
         ol.clear();
         ol.addAll(defaultListOfTimes);
     }
@@ -62,6 +68,7 @@ public class AddController {
             return reservations;
         }catch (Exception e) {
             e.printStackTrace();
+            System.out.println("chyba");
         }
         return null;
     }
@@ -97,6 +104,9 @@ public class AddController {
             changeWindow(event);
         }catch (Exception e){
             e.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            a.setTitle("Chyba");
+            a.showAndWait();
         }
     }
 
@@ -104,12 +114,13 @@ public class AddController {
         CustomValidator.validateName(tfName.getText());
         CustomValidator.validateName(tfSurname.getText());
         CustomValidator.datePicked(dpArriveDate.getValue());
-        CustomValidator.timePicked(cbArriveTime.getValue().toString());
-        CustomValidator.notEmpty(personId.getText());
+        CustomValidator.timePicked(cbArriveTime.getValue());
+        CustomValidator.validateBirthId(personId.getText());
+        System.out.println(personId.getText());
         CustomValidator.validatePhoneNumber(tfPhoneNumber.getText());
         CustomValidator.validateEmail(tfEmail.getText());
-        CustomValidator.notEmpty(tfSPZ.getText());
-        CustomValidator.notEmpty(taDescription.getText());
+        CustomValidator.notEmpty(tfSPZ.getText(),"SPZ");
+        CustomValidator.notEmpty(taDescription.getText(),"popis");
     }
 
     @FXML

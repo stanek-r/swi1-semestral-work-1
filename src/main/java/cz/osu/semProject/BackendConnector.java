@@ -1,5 +1,8 @@
 package cz.osu.semProject;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,6 +14,31 @@ public class BackendConnector {
     public static String sendingGetRequest() throws Exception {
 
         String urlString = "http://localhost:3000/reservations";
+
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        con.setRequestMethod("GET");
+
+        int responseCode = con.getResponseCode();
+        System.out.println("Sending get request : "+ url);
+        System.out.println("Response code : "+ responseCode);
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String output;
+        StringBuffer response = new StringBuffer();
+
+        while ((output = in.readLine()) != null) {
+            response.append(output);
+        }
+        in.close();
+
+        return response.toString();
+    }
+
+    public static String sendingGetRequest(String id) throws Exception {
+
+        String urlString = "http://localhost:3000/reservations/"+id;
 
         URL url = new URL(urlString);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -71,7 +99,7 @@ public class BackendConnector {
         System.out.println("Response code : "+ responseCode);
     }
 
-    public static void sendingPostRequest(String postJsonData) throws Exception {
+    public static String sendingPostRequest(String postJsonData) throws Exception {
 
         String url = "http://localhost:3000/reservations";
         URL obj = new URL(url);
@@ -92,6 +120,13 @@ public class BackendConnector {
         System.out.println("Post Data : " + postJsonData);
         System.out.println("Response Code : " + responseCode);
 
+        if(responseCode == 406){
+//            Alert a = new Alert(Alert.AlertType.ERROR,"Na tento čas je již zarezervovaný jiný termín", ButtonType.OK);
+//            a.setTitle("Chyba");
+//            a.showAndWait();
+            throw new RuntimeException("Na tento čas je již zarezervovaný jiný termín");
+        }
+
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String output;
         StringBuffer response = new StringBuffer();
@@ -102,6 +137,7 @@ public class BackendConnector {
         in.close();
 
         System.out.println(response.toString());
+        return response.toString();
     }
 }
 
