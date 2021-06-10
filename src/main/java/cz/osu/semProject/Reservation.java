@@ -31,9 +31,6 @@ public class Reservation{
         this.description = new SimpleStringProperty(description);
     }
 
-    private void Event(){
-        System.out.println("CEEEEEEEEEEEEST");
-    }
     public CheckBox getCheckBox() {
         return checkBox;
     }

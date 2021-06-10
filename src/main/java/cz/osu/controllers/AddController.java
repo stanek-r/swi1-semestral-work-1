@@ -32,7 +32,6 @@ public class AddController {
     @FXML private DatePicker dpArriveDate;
     @FXML private TextArea taDescription;
     @FXML private TextField tfSPZ;
-    @FXML private Button btnSubmit;
     @FXML private RadioButton rbNationality;
     @FXML private TextField personId;
     @FXML private TextField tfEmail;
@@ -40,7 +39,7 @@ public class AddController {
 
 
     @FXML
-    private void testAction(){
+    private void getTimes(){
         String tmp = dpArriveDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         cbArriveTime.setDisable(false);
         ObservableList<Object> ol = cbArriveTime.getItems();

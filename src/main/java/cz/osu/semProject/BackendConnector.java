@@ -121,9 +121,6 @@ public class BackendConnector {
         System.out.println("Response Code : " + responseCode);
 
         if(responseCode == 406){
-//            Alert a = new Alert(Alert.AlertType.ERROR,"Na tento čas je již zarezervovaný jiný termín", ButtonType.OK);
-//            a.setTitle("Chyba");
-//            a.showAndWait();
             throw new RuntimeException("Na tento čas je již zarezervovaný jiný termín");
         }
 
